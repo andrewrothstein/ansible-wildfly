@@ -1,7 +1,7 @@
 andrewrothstein.wildfly
 =========
 
-Installs [Wildfly](http://http://wildfly.org/).
+Installs [Wildfly](http://wildfly.org/).
 
 Requirements
 ------------
