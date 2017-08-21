@@ -1,6 +1,6 @@
-[![CircleCI](https://circleci.com/gh/andrewrothstein/ansible-wildfly.svg?style=svg)](https://circleci.com/gh/andrewrothstein/ansible-wildfly)
 andrewrothstein.wildfly
 =========
+[![Build Status](https://travis-ci.org/andrewrothstein/ansible-wildfly.svg?branch=master)](https://travis-ci.org/andrewrothstein/ansible-wildfly)
 
 Installs [Wildfly](http://wildfly.org/).
 
