@@ -1,6 +1,11 @@
 ---
 # defaults file for wildfly
-wildfly_version: 10.1.0.Final
+wildfly_version: 11.0.0.Final
 wildfly_mirror: http://download.jboss.org/wildfly
+
+wildfly_checksums:
+  # http://download.jboss.org/wildfly/11.0.0.Final/wildfly-11.0.0.Final.tar.gz
+  '11.0.0.Final': sha256:a2f5fb4187369196003e31eb086f0a1f7bfc0645a3a61a53ed20ab5853481e71
+
 wildfly_install_parent_dir: /usr/local
 
