@@ -1,28 +1,25 @@
----
+dependencies:
+- role: andrewrothstein.unarchive-deps
+  version: v1.0.10
+- role: andrewrothstein.openjdk
+  version: v1.0.0
 galaxy_info:
   author: Andrew Rothstein
-  description: installs wildfly
   company: BlackRock
+  description: installs wildfly
+  galaxy_tags:
+  - java
+  - appserver
   license:
-    - MIT
+  - MIT
   min_ansible_version: 2.0
   platforms:
-    - name: EL
-      versions:
-        - all
-    - name: Fedora
-      versions:
-        - all
-    - name: Ubuntu
-      versions:
-        - all
-  galaxy_tags:
-    - java
-    - appserver
-
-dependencies:
-  - role: andrewrothstein.unarchive-deps
-    version: v1.0.10
-  - role: andrewrothstein.java-oracle-jre
-    version: v2.1.2
-  
+  - name: EL
+    versions:
+    - all
+  - name: Fedora
+    versions:
+    - all
+  - name: Ubuntu
+    versions:
+    - all
