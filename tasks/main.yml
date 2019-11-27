@@ -2,7 +2,7 @@
 - name: look for install...
   become: yes
   stat:
-    path: '{{wildfly_install_dir}}'
+    path: '{{ wildfly_install_dir }}'
   changed_when: False
   register: wildfly_binary
 
@@ -12,9 +12,9 @@
       become: yes
       become_user: root
       get_url:
-        url: '{{wildfly_tgz_url}}'
-        dest: /tmp/{{wildfly_tgz}}
-        checksum: '{{wildfly_checksum}}'
+        url: '{{ wildfly_tgz_url }}'
+        dest: /tmp/{{ wildfly_tgz }}
+        checksum: '{{ wildfly_checksum }}'
         mode: 0644
 
     - name: unarchive
@@ -22,23 +22,23 @@
       become_user: root
       unarchive:
         remote_src: yes
-        src: /tmp/{{wildfly_tgz}}
-        dest: '{{wildfly_install_parent_dir}}'
-        creates: '{{wildfly_install_dir}}'
+        src: /tmp/{{ wildfly_tgz }}
+        dest: '{{ wildfly_install_parent_dir }}'
+        creates: '{{ wildfly_install_dir }}'
   always:
     - name: cleanup
       become: yes
       become_user: root
       file:
-        path: /tmp/{{wildfly_tgz}}
+        path: /tmp/{{ wildfly_tgz }}
         state: absent
 
 - name: link
   become: yes
   become_user: root
   file:
-    src: '{{wildfly_install_dir}}'
-    dest: '{{wildfly_install_parent_dir}}/wildfly'
+    src: '{{ wildfly_install_dir }}'
+    dest: '{{ wildfly_install_parent_dir }}/wildfly'
     state: link
 
 - name: add to path
@@ -47,9 +47,7 @@
   with_items:
     - f: wildfly.sh
       d: /etc/profile.d
-      m: 0644
   template:
-    src: '{{item.f}}.j2'
-    dest: '{{item.d}}/{{item.f}}'
-    mode: '{{item.m}}'
-    
+    src: '{{ item.f }}.j2'
+    dest: '{{ item.d }}/{{ item.f }}'
+    mode: '{{ item.m | default("0644") }}'

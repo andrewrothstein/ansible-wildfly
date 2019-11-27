@@ -1,9 +1,14 @@
 #!/usr/bin/env sh
 APP=wildfly
-VER=17.0.1.Final
 DIR=~/Downloads
-MIRROR=https://downloads.jboss.org/${APP}/${VER}
-URL=$MIRROR/${APP}-${VER}.tar.gz.sha1
+MIRROR=https://downloads.jboss.org/${APP}
 
-printf "  # %s\n" $URL
-printf "  '%s': sha1:%s\n" $VER $(curl -sSL $URL)
+dl_ver() {
+    local ver=$1
+    local url=$MIRROR/$ver/${APP}-${ver}.tar.gz.sha1
+
+    printf "  # %s\n" $url
+    printf "  '%s': sha1:%s\n" $ver $(curl -sSL $url)
+}
+
+dl_ver ${1:-18.0.1.Final}

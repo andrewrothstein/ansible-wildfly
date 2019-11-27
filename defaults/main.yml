@@ -1,7 +1,9 @@
 ---
 # defaults file for wildfly
-wildfly_version: 17.0.1.Final
+wildfly_version: 18.0.1.Final
 wildfly_mirror: http://download.jboss.org/wildfly
+
+wildfly_install_parent_dir: /usr/local
 
 wildfly_checksums:
   # http://download.jboss.org/wildfly/11.0.0.Final/wildfly-11.0.0.Final.tar.gz
@@ -18,5 +20,5 @@ wildfly_checksums:
   '17.0.0.Final': sha256:8bc5a67a24661d44da9bcf0bdd84fd28f7f51fa3dcafe4b29523cef6836d9870
   # https://downloads.jboss.org/wildfly/17.0.1.Final/wildfly-17.0.1.Final.tar.gz.sha1
   '17.0.1.Final': sha1:eaef7a87062837c215e54511c4ada8951f0bd8d5
-
-wildfly_install_parent_dir: /usr/local
+  # https://downloads.jboss.org/wildfly/18.0.1.Final/wildfly-18.0.1.Final.tar.gz.sha1
+  '18.0.1.Final': sha1:ef0372589a0f08c36b15360fe7291721a7e3f7d9
