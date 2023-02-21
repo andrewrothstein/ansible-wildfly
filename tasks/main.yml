@@ -1,48 +1,54 @@
 ---
-- name: look for install...
-  become: yes
+- include_role:
+    name: andrewrothstein.unarchive-deps
+- include_role:
+    name: andrewrothstein.temurin
+  vars:
+    openjdk_app: jre
+- name: looking for install in {{ wildfly_install_dir }}
+  become: true
   stat:
     path: '{{ wildfly_install_dir }}'
-  changed_when: False
+  changed_when: false
   register: wildfly_binary
 
 - when: not wildfly_binary.stat.exists
   block:
-    - name: download tgz
-      become: yes
+    - name: downloading {{ wildfly_tgz_url }} to {{ wildfly_tmp_tgz }}
+      become: true
       become_user: root
       get_url:
         url: '{{ wildfly_tgz_url }}'
-        dest: /tmp/{{ wildfly_tgz }}
+        dest: '{{ wildfly_tmp_tgz }}'
         checksum: '{{ wildfly_checksum }}'
         mode: 0644
 
-    - name: unarchive
-      become: yes
+    - name: unarchiving {{ wildfly_tmp_tgz }}
+      become: true
       become_user: root
       unarchive:
-        remote_src: yes
-        src: /tmp/{{ wildfly_tgz }}
+        remote_src: true
+        src: '{{ wildfly_tmp_tgz }}'
         dest: '{{ wildfly_install_parent_dir }}'
         creates: '{{ wildfly_install_dir }}'
   always:
-    - name: cleanup
-      become: yes
+    - name: rm {{ wildfly_tmp_tgz }}
+      become: true
       become_user: root
       file:
-        path: /tmp/{{ wildfly_tgz }}
+        path: '{{ wildfly_tmp_tgz }}'
         state: absent
 
-- name: link
-  become: yes
+- name: linking {{ wildfly_link_dir }} to {{ wildfly_install_dir }}
+  become: true
   become_user: root
   file:
     src: '{{ wildfly_install_dir }}'
-    dest: '{{ wildfly_install_parent_dir }}/wildfly'
+    dest: '{{ wildfly_link_dir }}'
     state: link
 
-- name: add to path
-  become: yes
+- name: adding wildfly to the default path
+  become: true
   become_user: root
   with_items:
     - f: wildfly.sh

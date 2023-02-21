@@ -2,7 +2,9 @@
 # vars file for wildfly
 wildfly_name: wildfly-{{ wildfly_version }}
 wildfly_tgz: '{{ wildfly_name }}.tar.gz'
+wildfly_tmp_tgz: /tmp/{{ wildfly_tgz }}
 wildfly_tgz_url: '{{ wildfly_mirror }}/{{ wildfly_version }}/{{ wildfly_tgz }}'
 wildfly_checksum: '{{ wildfly_checksums[wildfly_version] }}'
 
 wildfly_install_dir: '{{ wildfly_install_parent_dir }}/{{ wildfly_name }}'
+wildfly_link_dir: '{{ wildfly_install_parent_dir }}/wildfly'

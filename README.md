@@ -1,6 +1,6 @@
 andrewrothstein.wildfly
 =========
-[![Build Status](https://travis-ci.org/andrewrothstein/ansible-wildfly.svg?branch=master)](https://travis-ci.org/andrewrothstein/ansible-wildfly)
+![Build Status](https://github.com/andrewrothstein/ansible-wildfly/actions/workflows/build.yml/badge.svg)
 
 Installs [Wildfly](http://wildfly.org/).
 
