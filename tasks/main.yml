@@ -1,59 +1,59 @@
 ---
-- include_role:
-    name: andrewrothstein.unarchive-deps
-- include_role:
+- ansible.builtin.include_role:
+    name: andrewrothstein.unarchivedeps
+- ansible.builtin.include_role:
     name: andrewrothstein.temurin
   vars:
     openjdk_app: jre
-- name: looking for install in {{ wildfly_install_dir }}
+- name: Looking for install in {{ wildfly_install_dir }}
   become: true
-  stat:
+  ansible.builtin.stat:
     path: '{{ wildfly_install_dir }}'
   changed_when: false
   register: wildfly_binary
 
 - when: not wildfly_binary.stat.exists
   block:
-    - name: downloading {{ wildfly_tgz_url }} to {{ wildfly_tmp_tgz }}
+    - name: Downloading {{ wildfly_tgz_url }} to {{ wildfly_tmp_tgz }}
       become: true
       become_user: root
-      get_url:
+      ansible.builtin.get_url:
         url: '{{ wildfly_tgz_url }}'
         dest: '{{ wildfly_tmp_tgz }}'
         checksum: '{{ wildfly_checksum }}'
-        mode: 0644
+        mode: '644'
 
-    - name: unarchiving {{ wildfly_tmp_tgz }}
+    - name: Unarchiving {{ wildfly_tmp_tgz }}
       become: true
       become_user: root
-      unarchive:
+      ansible.builtin.unarchive:
         remote_src: true
         src: '{{ wildfly_tmp_tgz }}'
         dest: '{{ wildfly_install_parent_dir }}'
         creates: '{{ wildfly_install_dir }}'
   always:
-    - name: rm {{ wildfly_tmp_tgz }}
+    - name: Rm {{ wildfly_tmp_tgz }}
       become: true
       become_user: root
-      file:
+      ansible.builtin.file:
         path: '{{ wildfly_tmp_tgz }}'
         state: absent
 
-- name: linking {{ wildfly_link_dir }} to {{ wildfly_install_dir }}
+- name: Linking {{ wildfly_link_dir }} to {{ wildfly_install_dir }}
   become: true
   become_user: root
-  file:
+  ansible.builtin.file:
     src: '{{ wildfly_install_dir }}'
     dest: '{{ wildfly_link_dir }}'
     state: link
 
-- name: adding wildfly to the default path
+- name: Adding wildfly to the default path
   become: true
   become_user: root
   with_items:
     - f: wildfly.sh
       d: /etc/profile.d
-  template:
+  ansible.builtin.template:
     src: '{{ item.f }}.j2'
     dest: '{{ item.d }}/{{ item.f }}'
-    mode: '{{ item.m | default("0644") }}'
+    mode: '{{ item.m | default("644") }}'

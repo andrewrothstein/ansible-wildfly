@@ -1,6 +1,6 @@
 ---
 # defaults file for wildfly
-wildfly_version: 27.0.1.Final
+wildfly_version: 30.0.1.Final
 wildfly_mirror: https://github.com/wildfly/wildfly/releases/download
 
 wildfly_install_parent_dir: /usr/local
@@ -8,3 +8,9 @@ wildfly_install_parent_dir: /usr/local
 wildfly_checksums:
   # https://github.com/wildfly/wildfly/releases/download/27.0.1.Final/wildfly-27.0.1.Final.tar.gz.sha1
   '27.0.1.Final': sha1:a747cec6cf347bd71aeeabecc0e0856e6b431c6c
+  # https://github.com/wildfly/wildfly/releases/download/28.0.1.Final/wildfly-28.0.1.Final.tar.gz.sha1
+  '28.0.1.Final': sha1:8702fb7ba8d1249bf058e2223f662e5176b39d0d
+  # https://github.com/wildfly/wildfly/releases/download/29.0.1.Final/wildfly-29.0.1.Final.tar.gz.sha1
+  '29.0.1.Final': sha1:deab607f8cd403508ecaa40a9bfc887b202d6b6a
+  # https://github.com/wildfly/wildfly/releases/download/30.0.1.Final/wildfly-30.0.1.Final.tar.gz.sha1
+  '30.0.1.Final': sha1:d6827219672cabfd4eca47e5b64699727bb61f0b
